@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "build": "npx tsc",
+    "build-watch": "npx tsc --watch",
+    "eslint:fix": "eslint --ignore-path .gitignore --quiet --fix --ext .ts *",
+    "prettier:fix": "prettier **/*.{js,ts,jsx,tsx} --write"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "inquirer": "^8.1.0",
+    "npm-add-script": "^1.1.0"
+  }
+}

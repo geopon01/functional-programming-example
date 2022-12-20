@@ -1,0 +1,50 @@
+{
+  "env": { "browser": true, "es6": true, "node": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",    
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": "tsconfig.json", "sourceType": "module", "ecmaFeatures": { "jsx": true } },
+  "plugins": ["@typescript-eslint", "import", "react", "sort-imports-es6-autofix"],
+  "rules": {
+    "complexity": "error",
+    "curly": "warn",
+    "default-case": "warn",
+    "eol-last": ["warn", "always"],
+    "eqeqeq": ["error", "always"],
+    "new-parens": "warn",
+    "no-bitwise": "error",
+    "no-multiple-empty-lines": "warn",
+    "no-return-await": "error",
+    "no-useless-constructor": "error",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "prefer-spread": "warn",
+    "no-debugger": "warn",
+    "array-bracket-spacing": "warn",
+    "block-spacing": "warn",
+    "comma-spacing": "warn",
+    "computed-property-spacing": [2, "never"],
+    "no-mixed-spaces-and-tabs": "warn",
+    "no-spaced-func": "warn",
+    "no-trailing-spaces": "warn",
+    "space-before-blocks": "warn",
+    "arrow-spacing": "warn",
+    "generator-star-spacing": "warn",
+    "for-direction": "warn",
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      { "ignoreCase": false, "ignoreMemberSort": false, "memberSyntaxSortOrder": ["none", "all", "multiple", "single"] }
+    ],
+    "valid-jsdoc": ["warn", { "requireReturn": false }],
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "@typescript-eslint/no-inferrable-types": "off"
+  }
+}
