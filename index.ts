@@ -1,4 +1,7 @@
-// npx tsc -w
+/**
+ * run "npx tsc -w" so the compiler watches and builds the file
+ * run "node out/index.js" to run the app (or use the debugger)
+ */
 console.log('\n', '\n', '\n');
 
 interface User {
@@ -30,35 +33,72 @@ enum Kind {
   KIND3 = 'kind3',
 }
 
-type Message = { request: string; kind: Kind; data: number[] };
+type Message1 = { kind: Kind.KIND1; request: string; data: number[] };
 
 const getPositiveValues = (data: number[]) => data.filter((d) => d > 0);
 
 /**
  * Different message type
  */
-type Message2 = { author: string; data: number[] };
+type Message2 = { kind: Kind.KIND2; author: string; data: number[] };
+type Message3 = { kind: Kind.KIND3; username: string; email: string };
 
 /**
  * UNION
  * We can create a UNION of types so we can be more abstract and handle them as the same thing (for the parts that overlap (common between union types))
  */
-type MessageBase = Message | Message2;
+type Message1And2 = Message1 | Message2;
 
-const processMessageData = (messages: MessageBase[]) => messages.map((m) => console.log(getPositiveValues(m.data)));
+const processMessageData = (messages: Message1And2[]) => messages.map((m) => console.log(getPositiveValues(m.data)));
+
+type MessagesAll = Message1 | Message2 | Message3;
+
+// eslint-disable-next-line valid-jsdoc
+/**
+ * We can logically group types that are similar to us with a Union
+ * Then let the compiler narrow-down the actual sub-type through code
+ * No casting is needed
+ * VALUE of "KIND" is used to define the type.
+ */
+const handleMessage = (msg: MessagesAll) => {
+  // so far we can only access msg.king here since it's the only common field
+  console.log(msg.kind);
+  //however we can do a lot more than that (types are types, not classes)
+  switch (msg.kind) {
+    case Kind.KIND1:
+      // know we know this is a Message1
+      console.log(msg.request);
+      console.log(msg.data);
+      break;
+    case Kind.KIND2:
+      // know we know this is a Message2
+      console.log(msg.author);
+      console.log(msg.data);
+      break;
+    case Kind.KIND3:
+      // know we know this is a Message3
+      console.log(msg.email);
+      console.log(msg.username);
+      break;
+    default:
+      break;
+  }
+};
 
 /**
  * INTERSECTION
  * Pull all the properties together to create a new type
  */
 
-type MessageIntersection = Message & Message2;
+type Type1 = { something: string; somethingElse: string };
+type Type2 = { evenMore: string; someOtherThings: string };
+type MessageIntersection = Type1 & Type2;
 
 const messageIntersectionObject: MessageIntersection = {
-  request: 'request',
-  kind: Kind.KIND1,
-  data: [],
-  author: 'author',
+  something: '',
+  somethingElse: '',
+  evenMore: '',
+  someOtherThings: '',
 };
 
 /**
@@ -66,13 +106,13 @@ const messageIntersectionObject: MessageIntersection = {
  * You can pick properties from different types and build a new one
  */
 
-type Message3 = User & Pick<Message, 'data' | 'kind'>;
+type Message4 = User & Pick<Message1, 'data' | 'kind'>;
 
-const message3Object: Message3 = {
+const message4Object: Message4 = {
   name: 'name',
   surname: 'surname',
   data: [],
-  kind: Kind.KIND2,
+  kind: Kind.KIND1,
 };
 
 console.log('\n', '\n', '\n');
